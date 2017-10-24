@@ -30,9 +30,5 @@ ADD /docker/app/start.sh /root/start.sh
 
 RUN chmod 700 /root/start.sh
 
-ADD . /root/
-
 EXPOSE 80
-
-CMD ["/root/start.sh"]
 

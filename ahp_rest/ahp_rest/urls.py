@@ -14,10 +14,16 @@ Including another URLconf
     2. Add a URL to urlpatterns:  url(r'^blog/', include('blog.urls'))
 """
 from django.conf.urls import url, include
+from django.conf.urls.static import static
 from django.contrib import admin
+
+from rest_framework.documentation import include_docs_urls
+
+from .settings import STATIC_URL, STATIC_ROOT
 
 
 urlpatterns = [
     url(r'^admin/', admin.site.urls),
+    url(r'^$docs/', include_docs_urls(title='Todo API', description='RESTful API for Todo')),
     url(r'^', include('objectives.urls')),
-]
+] + static(STATIC_URL, document_root=STATIC_ROOT)

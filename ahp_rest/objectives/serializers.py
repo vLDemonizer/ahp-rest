@@ -13,7 +13,7 @@ class JudgementSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = Judgement
-        fields = ('name', 'comment')
+        fields = ('name', 'comment', 'components')
 
     def create(self, validated_data):
         components_data = validated_data.pop('components')
@@ -27,8 +27,8 @@ class ObjectiveSerializer(serializers.ModelSerializer):
     judgments = JudgementSerializer(many=True)
 
     class Meta:
-        model = Judgement
-        fields = ('name', 'scale', 'alpha', 'gci', 'cr', 'thresh')
+        model = Objective
+        fields = ('name', 'scale', 'alpha', 'gci', 'cr', 'thresh', 'judgments')
 
     def create(self, validated_data):
         judgments_data = validated_data.pop('judgments')
