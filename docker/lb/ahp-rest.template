@@ -1,0 +1,12 @@
+upstream ahp-rest {
+    server ahp-rest:8000;
+}
+
+server {
+    listen 80;
+    charset utf-8;
+    location / {
+        proxy_pass http://ahp-rest;
+        include /etc/nginx/uwsgi_params;
+    }
+}
