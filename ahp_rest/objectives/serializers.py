@@ -32,6 +32,10 @@ class ObjectiveSerializer(serializers.ModelSerializer):
 
     def create(self, validated_data):
         judgments_data = validated_data.pop('judgments')
+        author = None
+        request = self.context.get('request')
+        if request and hasattr(request, 'user'):
+            author = request.user
         objective = Objective.objects.create(**validated_data)
         for judgement_data in judgments_data:
             Judgement.objects.create(objective=objective, **judgement_data)

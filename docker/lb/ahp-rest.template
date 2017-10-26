@@ -5,6 +5,7 @@ upstream ahp-rest {
 server {
     listen 80;
     charset utf-8;
+    
     location / {
         proxy_pass http://ahp-rest;
         include /etc/nginx/uwsgi_params;

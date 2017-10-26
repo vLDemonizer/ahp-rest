@@ -37,7 +37,7 @@ for var in [
 
 # Application definition
 
-INSTALLED_APPS = [
+DJANGO_APPS = [
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
@@ -45,15 +45,27 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'django.contrib.sites',
+]
+
+THIRD_PARTY_APPS = [
     'rest_framework',
+]
+
+PROJECT_APPS = [
     'objectives',
     'users',
 ]
 
+INSTALLED_APPS = DJANGO_APPS + THIRD_PARTY_APPS + PROJECT_APPS
+
 AUTH_USER_MODEL = 'users.Participant'
 
-MIDDLEWARE = [
+
+SECURITY_MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
+]
+
+DJANGO_MIDDLEWARE = [
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
@@ -61,6 +73,8 @@ MIDDLEWARE = [
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
 ]
+
+MIDDLEWARE = SECURITY_MIDDLEWARE + DJANGO_MIDDLEWARE
 
 ROOT_URLCONF = 'ahp_rest.urls'
 
@@ -139,5 +153,7 @@ STATICFILES_FINDERS = (
 )
 """
 STATIC_URL = '/static/'
-STATICFILES_DIRS = [os.path.join(BASE_DIR, 'static')]
+STATICFILES_DIRS = [
+     os.path.join(BASE_DIR, 'static'),
+]
 STATIC_ROOT = '/static/'

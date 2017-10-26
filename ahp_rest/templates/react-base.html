@@ -1,0 +1,39 @@
+{% load static %}
+<html class="{% block html_class %}{% endblock html_class %}" lang="en">
+  <head>
+    <!-- Allows you to inject head elements here -->
+    {% block head %}
+
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
+
+    <meta name="author" content="">
+    <meta name="description" content="">
+    <meta name="keywords" content="">
+
+    <title>{% block head_title %}{% endblock head_title %}</title>
+
+    {% block stylesheets %}
+    <link rel="stylesheet" href="{% static 'css/bootstrap.css' %}">
+    <link rel="stylesheet" href="{% static 'css/styles.css' %}">
+    {% endblock stylesheets %}
+
+    {% endblock head %}
+
+  </head>
+  <body class="{% block body_class %}{% endblock body_class %}">
+    {% block content %}{% endblock %}
+    {% block app %}{% endblock %}
+    <script src="{% static 'js/axios.min.js' %}"></script>
+    <script src="{% static 'js/jquery-3.2.1.min.js' %}"></script>
+    <script src="{% static 'js/popper.js' %}"></script>
+    <script src="{% static '/js/bootstrap.min.js' %}"></script>
+    <script src="{% static 'js/babel.js' %}"></script>
+    <script src="{% static 'js/react.js' %}"></script>
+    <script src="{% static 'js/react-dom.js' %}"></script>
+    {% block extra_scripts %}{% endblock %}
+    {% block app_scripts %}{% endblock %}
+  </body>
+</html>

@@ -1,0 +1,16 @@
+{% extends 'react-base.html' %}
+{% load static %}
+
+{% block content %}
+
+{% endblock %}
+{% block app %}
+<div id="react-root">Hi</div>
+{% endblock %}
+
+{% block app_scripts %}
+<script type="text/babel" src="{% static 'react/create-objective.jsx' %}"></script>
+<script type="text/babel" src="{% static 'react/user.jsx' %}"></script>
+<script type="text/babel" src="{% static 'react/user-list.jsx' %}"></script>
+<script type="text/babel" src="{% static 'react/judgement-table.jsx' %}"></script>
+{% endblock %}
