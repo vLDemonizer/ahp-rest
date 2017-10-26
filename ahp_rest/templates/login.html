@@ -11,7 +11,7 @@
     <title>Signin Template for Bootstrap</title>
 
     <!-- Bootstrap core CSS -->
-    <link href="{% static 'css/bootstrap.min.css' %}" rel="stylesheet">
+    <link href="{% static 'css/bootstrap.css' %}" rel="stylesheet">
 
     <!-- Custom styles for this template -->
     <link href="{% static 'css/signin.css' %}" rel="stylesheet">
@@ -21,7 +21,9 @@
 
     <div class="container">
 
-      <form class="form-signin">
+      <form class="form-signin" method="post">
+        {% csrf_token %}
+        {{form.errors}}
         <h2 class="form-signin-heading">Please sign in</h2>
         <label for="inputEmail" class="sr-only">Username</label>
         <input type="text" id="id_username" name="username" class="form-control" placeholder="Username" required autofocus>

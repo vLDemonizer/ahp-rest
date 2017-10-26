@@ -9,7 +9,7 @@ class ComponentSerializer(serializers.ModelSerializer):
 
 
 class JudgementSerializer(serializers.ModelSerializer):
-    components = ComponentSerializer(many=True)
+    components = ComponentSerializer(many=True, required=False)
 
     class Meta:
         model = Judgement
@@ -24,19 +24,23 @@ class JudgementSerializer(serializers.ModelSerializer):
 
 
 class ObjectiveSerializer(serializers.ModelSerializer):
-    judgments = JudgementSerializer(many=True)
+    judgments = JudgementSerializer(many=True, required=False)
 
     class Meta:
         model = Objective
         fields = ('name', 'scale', 'alpha', 'gci', 'cr', 'thresh', 'judgments')
 
     def create(self, validated_data):
-        judgments_data = validated_data.pop('judgments')
+        judgments = validated_data.pop('judgments')
         author = None
         request = self.context.get('request')
         if request and hasattr(request, 'user'):
             author = request.user
         objective = Objective.objects.create(**validated_data)
-        for judgement_data in judgments_data:
-            Judgement.objects.create(objective=objective, **judgement_data)
+        for judgment in judgments:
+            Judgement.objects.create(
+                objective=objective, 
+                name=judgment['name'], 
+                comment=judgment['comment']
+            )
         return objective

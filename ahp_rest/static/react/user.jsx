@@ -14,6 +14,12 @@ class UserCreateComponent extends React.Component {
         this.submitUser = this.submitUser.bind(this);
     }
 
+    componentWillMount () {
+        $('#title').text('User Create');
+        axios.get('/users')
+        .then(response => console.log(response.data))
+    }
+
     handleChange(key) {
         return (e) => {
             this.setState({
@@ -31,12 +37,12 @@ class UserCreateComponent extends React.Component {
                 error: 'Fill all the fields before Submit'
             });       
         }
-        const user = this.state
+        let user = this.state;
         axios.post('/users/', {
             username: user.username,
             password: user.password,
             first_name: user.first_name,
-            last_name: user.last_name,
+            last_name: user.last_name
         })
             .then(response => {
                 this.setState({submitted: true});
@@ -47,6 +53,7 @@ class UserCreateComponent extends React.Component {
                     submitted: false
                 });
             });
+        
         
     }
 
@@ -83,7 +90,7 @@ class UserCreateComponent extends React.Component {
                     <label>Last Name: </label>
                     <input className="form-control" onChange={this.handleChange('last_name')} value={this.state.last_name}/>
                 </div>
-                <button className="btn-btn-primary" type="button" onClick={this.submitUser}>Submit</button>
+                <button className="btn btn-secondary" type="button" onClick={this.submitUser}>Submit</button>
             </div>
         );
     }
